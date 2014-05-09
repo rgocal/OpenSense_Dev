@@ -1,17 +1,22 @@
 package com.opensense.dev;
 
-import android.os.Bundle;
-
-import com.htc.preference.HtcPreferenceActivity;
-import com.htc.widget.ActionBarContainer;
-import com.htc.widget.ActionBarExt;
-import com.htc.widget.ActionBarText;
+import android.content.*;
+import android.os.*;
+import com.htc.preference.*;
+import com.htc.widget.*;
+import com.htc.configuration.*;
 
 
 public class MainActivity extends HtcPreferenceActivity  {
 	private ActionBarExt actionBarExt=null;
 	private ActionBarText actionBarText=null;    
 	private ActionBarContainer actionBarContainer=null;
+	
+	public static int getHtcThemeID(Context context, int i)
+    {
+		return HtcWrapConfiguration.getHtcThemeId(context, i);
+
+    }
 	
 	private void SetupActionBar() {
         actionBarExt=new ActionBarExt(this,getActionBar());
@@ -24,7 +29,10 @@ public class MainActivity extends HtcPreferenceActivity  {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.prefs);
+		Context context = this;
+		setTheme(getHtcThemeID(context, 3));
+	    addPreferencesFromResource(R.xml.prefs);
 		SetupActionBar();
+		
 	}
 }
